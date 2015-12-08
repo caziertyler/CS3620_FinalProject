@@ -11,13 +11,16 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Notes\Domain\Entity\UserBuilder;
-use Notes\Domain\Entity\User;
 use \Notes\Persistence\Entity\MysqlUserRepository;
 
 $app = new Application();
 
 
-$app->post('/users',function(Request $request) {
+$app->post(/**
+ * @param Request $request
+ * @return Response
+ */
+    '/users',function(Request $request) {
 
     $data = json_decode($request->getContent(), true);
     $request->request->replace(is_array($data) ? $data : array());
@@ -31,21 +34,19 @@ $app->post('/users',function(Request $request) {
     $repo = new MysqlUserRepository();
     $userBuilder = new UserBuilder();
 
-    if (isset($data['email'])) {
-        $user = $userBuilder->build($data['email'], $data['firstName'], $data['lastName']);
-    }
-    else {
+    if (!isset($data['email'])) {
         $this->abort(406, 'Invalid Input');
     }
 
+    $user = $userBuilder->build($data['email'], $data['firstName'], $data['lastName']);
     $repo->add($user);
 
     $success_message = "Success";
     $response =  new Response(json_encode($success_message,200));
     $response->headers->set('Content-Type','application/json');
     $response->headers->set('Content-Length',strlen($success_message));
-    return $response;
 
+    return $response;
 });
 
 $app->get('/',function(){
