@@ -26,10 +26,10 @@ class MysqlUserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param \Notes\Domain\ValueObject $id
+     * @param Uuid $id
      * @return mixed
      */
-    public function addByUserId(User $id)
+    public function addByUserId(Uuid $id)
     {
         // TODO: Implement addByUserId() method.
     }
@@ -51,7 +51,7 @@ class MysqlUserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param \Notes\Domain\Entity\User $ user
+     * @param \Notes\Domain\Entity\User $user
      * @return mixed
      */
     public function get(User $user)
@@ -60,16 +60,16 @@ class MysqlUserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param \Notes\Domain\ValueObject $id
+     * @param \Notes\Domain\ValueObject\Uuid $id
      * @return mixed
      */
-    public function getByUserId(User $id)
+    public function getByUserId(Uuid $id)
     {
         // TODO: Implement getByUserId() method.
     }
 
     /**
-     * @param \Notes\Domain\Entity\User $ user
+     * @param \Notes\Domain\Entity\User $user
      * @return mixed
      */
     public function modify(User $user)
@@ -78,10 +78,10 @@ class MysqlUserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param \Notes\Domain\ValueObject $id
+     * @param \Notes\Domain\ValueObject\Uuid $id
      * @return mixed
      */
-    public function modifyByUserId(User $id)
+    public function modifyByUserId(Uuid $id)
     {
         // TODO: Implement modifyByUserId() method.
     }

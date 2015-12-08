@@ -25,7 +25,7 @@ interface UserRepositoryInterface
     public function count();
 
     /**
-     * @param \Notes\Domain\Entity\User $ user
+     * @param \Notes\Domain\Entity\User $user
      * @return mixed
      */
     public function get(User $user);
@@ -54,7 +54,7 @@ interface UserRepositoryInterface
     public function modifyById(Uuid $search, User $newUser);
 
     /**
-     * @param \Notes\Domain\Entity\User $userUser $user
+     * @param \Notes\Domain\Entity\User $user
      * @return bool
      */
     public function remove(User $user);

@@ -8,11 +8,22 @@
 
 namespace Notes\Domain;
 
+use Notes\Domain\ValueObject\StringLiteral;
+
+/**
+ * Interface BuilderInterface
+ * @package Notes\Domain
+ */
 /**
  * Interface BuilderInterface
  * @package Notes\Domain
  */
 interface BuilderInterface
 {
-    public function build();
+    /**
+    * @param StringLiteral $firstName
+    * @param StringLiteral $lastName
+    * @param StringLiteral $email
+    */
+    public function build(StringLiteral $email, StringLiteral $firstName, StringLiteral $lastName);
 }

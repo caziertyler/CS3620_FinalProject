@@ -11,6 +11,7 @@ namespace Notes\Domain\Entity;
 use Notes\Domain\BuilderInterface;
 use Notes\Domain\ValueObject\StringLiteral;
 use Notes\Domain\ValueObject\Uuid;
+use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
 
 class UserBuilder implements BuilderInterface
 {
@@ -18,57 +19,60 @@ class UserBuilder implements BuilderInterface
     protected $email;
 
     /** @var  string */
-    protected $firstname;
+    protected $firstName;
 
     /** @var  \Notes\Domain\ValueObject\Uuid */
     protected $id;
 
     /** @var  string */
-    protected $lastname;
+    protected $lastName;
 
     /**
-     * @return \Notes\Domain\Entity\User
+     * @param StringLiteral $firstName
+     * @param StringLiteral $lastName
+     * @param StringLiteral $email
+     * @return User
      * @throws BadMethodCallException
      */
-    public function build()
+    public function build(StringLiteral $email, StringLiteral $firstName, StringLiteral $lastName)
     {
-        if ($this->email === null || $this->firstname === null || $this->lastname === null) {
+        if ($this->email === null || $this->firstName === null || $this->lastName === null) {
             throw new BadMethodCallException(
                 __METHOD__. '(): requires that an email address, firstname, and lastname be set for a new user.'
             );
         } else {
-            return new User(new Uuid, new StringLiteral($this->firstname), new StringLiteral($this->lastname), new StringLiteral($this->email));
+            return new User(new Uuid, new StringLiteral($this->firstName), new StringLiteral($this->lastName), new StringLiteral($this->email));
         }
     }
 
     /**
      * @param string $email
      */
-    public function setEmail (string $email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
 
     /**
-     * @param string $firstname
+     * @param string $firstName
      */
-    public function setFirstName (string $firstname)
+    public function setFirstName(string $firstName)
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
     }
 
     /**
-     * @param string $lastname
+     * @param string $lastName
      */
-    public function setLastName (string $lastname)
+    public function setLastName (string $lastName)
     {
-        $this->lastname = $lastname;
+        $this->lastName = $lastName;
     }
 
     /**
      * @return string
      */
-    public function getEmail ()
+    public function getEmail()
     {
         return $this->email;
     }
@@ -76,7 +80,7 @@ class UserBuilder implements BuilderInterface
     /**
      * @return string
      */
-    public function getFirstName ()
+    public function getFirstName()
     {
         return $this->firstname;
     }

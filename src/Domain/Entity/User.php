@@ -30,6 +30,7 @@ class User
     protected $email;
 
     /**
+     * @param Uuid $id
      * @param StringLiteral $firstName
      * @param StringLiteral $lastName
      * @param StringLiteral $email
@@ -93,6 +94,12 @@ class User
      */
     public function setLastName($lastName) {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
 
         return $this;
     }

@@ -9,12 +9,13 @@
 namespace Notes\Domain\ValueObject;
 
 use Notes\Domain\ValueObject\StringLiteral;
+use Psr\Log\InvalidArgumentException;
 
 class Uuid extends StringLiteral
 {
 	/**
 	 * @param string $value
-	 * @throws InvalidArgumentExpection
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct($value = StringLiteral::EMPTY_STR)
 	{
@@ -25,7 +26,7 @@ class Uuid extends StringLiteral
 		}
 
 		if (!$this->isValidV4()) {
-			throw new InvalidArgumentExpection(
+			throw new InvalidArgumentException(
 				__METHOD__ . '(): $value is not a valid v4 uuid'
 			);
 		}
