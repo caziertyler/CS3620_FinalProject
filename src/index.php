@@ -34,11 +34,20 @@ $app->post(/**
     $repo = new MysqlUserRepository();
     $userBuilder = new UserBuilder();
 
-    if (!isset($data['email'])) {
-        $this->abort(406, 'Invalid Input');
-    }
+	if(isset($data['email']))
+    {   
+        $user->setUsername($data['email']);
+    }   
+    if(isset($data['firstName']))
+    {   
+        $user->setFirstName($data['firstName']);
+    }   
+    if(isset($data['lastName']))
+    {   
+        $user->setLastName($data['lastName']);
+    }  
 
-    $user = $userBuilder->build($data['email'], $data['firstName'], $data['lastName']);
+    $user = $userBuilder->build();
     $repo->add($user);
 
     $success_message = "Success";
@@ -57,12 +66,12 @@ $app->get('/',function(){
 
 $app->get('/users',function(){
 
-    $sort = isset($_REQUEST['sort']) ? strtoupper(['sort']) : null;
+    $sort = isset($_REQUEST['sort-username']) ? strtoupper(['sort']) : null;
     $repo = new MysqlUserRepository();
     $decoded_json = json_decode($repo->getAll());
 
-    if(isset($sort)) {
-        if($sort == 'ASC') {
+    if(isset($sort-username)) {
+        if($sort-username == 'ASC') {
             $decoded_json = asort($decoded_json);
         }
         else {
